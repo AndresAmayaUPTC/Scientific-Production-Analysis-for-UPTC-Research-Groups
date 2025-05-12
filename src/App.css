@@ -1,0 +1,41 @@
+.App {
+  text-align: left;
+}
+
+.App-header {
+  background-color: gray;
+  height: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.App-link {
+  color: #61dafb;
+}
+aside{
+  background-color: #cfcfcf;
+  float: left;
+  height: 600px;
+  width: 200px;
+}
+img{
+  width: 200px;
+  height: 170px;
+}
+li{
+  background-color: white;
+  border-radius: 2%;
+  list-style-type: none;
+  border: #61dafb;
+}
+h1{
+ text-align: center; 
+}
+body{
+  padding-top: 20px;
+
+}
+
