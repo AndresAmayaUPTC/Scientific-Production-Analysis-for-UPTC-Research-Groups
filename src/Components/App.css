@@ -1,0 +1,73 @@
+body{
+  font-family: Arial, sans-serif;
+  margin: 0px;
+  padding: 0;
+  text-align: center;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content */
+  padding: 10px;
+  background-color: #FFC107; /* Adjusted yellow to a more formal shade */
+  color: rgb(95, 95, 95);
+}
+
+header h1 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+}
+
+
+button {
+  border-radius: 12px; /* Rounded corners */
+  padding: 10px 20px;
+  border: none;
+  background-color: #FFC107; /* Match the formal yellow */
+  color: #333;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+button:hover {
+  background-color: #555; /* Darker gray for hover effect */
+}
+
+.sidebar {
+  overflow: hidden;
+  width: 200px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.logo-container{
+  overflow: hidden;
+
+ 
+
+}
+
+.pagination-buttons {
+  flex-direction: column; /* Stack buttons vertically */
+  width: 100%; /* Ensure buttons take full width of the sidebar */
+  height: 100%; /* Ensure sidebar takes full height */
+  box-sizing: border-box; /* Include padding and borders in the width */
+  overflow: hidden; /* Prevent content from overflowing */
+}
+
+.pagination-buttons button {
+  margin: 5px 0; /* Add spacing between buttons */
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 100%; /* Ensure buttons fit within the sidebar */
+  box-sizing: border-box; /* Include padding in the button width */
+}
+
+
+
+
+

@@ -1,41 +1,39 @@
 .App {
   text-align: left;
 }
-
-.App-header {
-  background-color: gray;
-  height: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-.App-link {
-  color: #61dafb;
-}
-aside{
-  background-color: #cfcfcf;
-  float: left;
-  height: 600px;
-  width: 200px;
-}
-img{
-  width: 200px;
-  height: 170px;
-}
-li{
-  background-color: white;
-  border-radius: 2%;
-  list-style-type: none;
-  border: #61dafb;
-}
-h1{
- text-align: center; 
-}
 body{
-  padding-top: 20px;
+  margin:0px;
+ }
+ header h1 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #696969;
+}
+.img_logo{
+  width:100%;
+  height: 30%;
+}
+.App_aside {
+  background-color: #e5e2dd;
+  float: left;
+  height: 480px;
+  width: 15%;
+ 
+}
+.App_main {
+  float: right;
+  height:480px;
+  width: 85%;
 
 }
+.App_header{
+  background-color: #bdbcb7;
+  color: rgb(95, 95, 95);
+  padding: 1em 0;
+}
 
+
+div {
+  height: 100%;
+  width: 100%;
+}
