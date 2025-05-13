@@ -1,16 +1,17 @@
 .App {
   text-align: left;
 }
-body{
-  margin:0px;
- }
- header h1 {
-  text-align: center;
-  font-size: 1.5em;
-  color: #696969;
+body {
+  margin: 0px;
 }
-.img_logo{
-  width:100%;
+/* header h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: #181818;
+  font-weight: bolder;
+} */
+.img_logo {
+  width: 100%;
   height: 30%;
 }
 .App_aside {
@@ -18,20 +19,17 @@ body{
   float: left;
   height: 480px;
   width: 15%;
- 
 }
 .App_main {
   float: right;
-  height:480px;
+  height: 480px;
   width: 85%;
-
 }
-.App_header{
+.App_header {
   background-color: #bdbcb7;
   color: rgb(95, 95, 95);
   padding: 1em 0;
 }
-
 
 div {
   height: 100%;
