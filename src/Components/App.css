@@ -1,73 +1,59 @@
-body{
+body {
   font-family: Arial, sans-serif;
   margin: 0px;
   padding: 0;
   text-align: center;
 }
+
 header {
   display: flex;
   align-items: center;
-  justify-content: center; /* Center the content */
+  justify-content: start;
   padding: 10px;
-  background-color: #FFC107; /* Adjusted yellow to a more formal shade */
-  color: rgb(95, 95, 95);
+  background-color: #ffcc28;
+  gap: 2em;
+  color: #181818c4;
 }
 
 header h1 {
   text-align: center;
-  font-size: 1.5em;
-  color: #333;
+  font-size: 2em;
+  color: #181818;
 }
 
-
-button {
-  border-radius: 12px; /* Rounded corners */
-  padding: 10px 20px;
+.button-pagination {
+  background-color: transparent;
   border: none;
-  background-color: #FFC107; /* Match the formal yellow */
-  color: #333;
+  border-radius: 8px;
+  padding: 0.7em 4em 0.7em 1em;
   cursor: pointer;
-  border-radius: 2px;
+  font-weight: 500;
+  font-size: 1em;
+  display: flex;
+  margin: 0;
+  justify-content: start;
+  align-items: center;
+  gap: 0.7em;
+  transition: all 150ms ease-in-out;
+  box-shadow: none;
 }
 
-button:hover {
-  background-color: #555; /* Darker gray for hover effect */
+.button-pagination:hover {
+  background-color: white;
+  /* box-shadow: 0px 0px 20px #18181831; */
 }
 
 .sidebar {
-  overflow: hidden;
-  width: 200px;
-  background-color: #f4f4f4;
-  border-right: 1px solid #ccc;
-  box-sizing: border-box; /* Ensure padding is included in the width */
-}
-
-.logo-container{
-  overflow: hidden;
-
- 
-
+  width: 100%;
+  height: 100%;
+  padding: 3em 2em;
+  background-color: #e9e9e9;
 }
 
 .pagination-buttons {
-  flex-direction: column; /* Stack buttons vertically */
-  width: 100%; /* Ensure buttons take full width of the sidebar */
-  height: 100%; /* Ensure sidebar takes full height */
-  box-sizing: border-box; /* Include padding and borders in the width */
-  overflow: hidden; /* Prevent content from overflowing */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  gap: 1em;
 }
-
-.pagination-buttons button {
-  margin: 5px 0; /* Add spacing between buttons */
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  width: 100%; /* Ensure buttons fit within the sidebar */
-  box-sizing: border-box; /* Include padding in the button width */
-}
-
-
-
-
-
