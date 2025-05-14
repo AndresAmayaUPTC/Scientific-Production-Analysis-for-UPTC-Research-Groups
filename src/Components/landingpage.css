@@ -6,7 +6,7 @@ body {
   height: 100dvh;
 }
 
-header {
+.landing-header {
   background-color: #ffcc28;
   display: flex;
   flex-direction: column;
@@ -45,20 +45,20 @@ ul li {
   padding: 0.2em 0.8em;
 }
 
-header div {
+.landing-header div {
   display: flex;
   flex-direction: column;
   gap: 1em;
   align-items: center;
 }
 
-header h1 {
+.landing-header h1 {
   font-size: 2.5em;
   font-weight: bolder;
   margin: 0;
 }
 
-header span {
+.landing-header span {
   font-size: 1.5em;
   font-weight: 600;
   margin: 0;
@@ -160,16 +160,16 @@ button:hover {
     margin: 0 2%;
   }
 
-  header {
+  .landing-header {
     gap: 2em;
     padding: 1.5em 0;
   }
 
-  header h1 {
+  .landing-header h1 {
     font-size: 2em;
   }
 
-  header span {
+  .landing-header span {
     font-size: 1.2em;
   }
 
@@ -184,11 +184,11 @@ button:hover {
 }
 
 @media screen and (max-width: 500px) {
-  header h1 {
+  .landing-header h1 {
     font-size: 1.3em;
   }
 
-  header span {
+  .landing-header span {
     font-size: 1em;
   }
 
@@ -198,7 +198,7 @@ button:hover {
     gap: 0.7em;
   }
 
-  header span {
+  .landing-header span {
     width: 20em;
   }
 

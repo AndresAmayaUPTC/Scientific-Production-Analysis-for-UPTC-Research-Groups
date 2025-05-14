@@ -8,7 +8,7 @@ import "./landingpage.css";
 function LandingPage() {
   return (
     <div className="main-container">
-      <header>
+      <header className="landing-header">
         <div className="image-container">
           <img
             src={Book}
