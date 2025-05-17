@@ -20,13 +20,16 @@ const PowerBIReport = () => {
             },
           },
         }}
-        getEmbeddedComponent={(embeddedReport) => {
+        getEmbeddedComponent={async (embeddedReport) => {
           window.report = embeddedReport;
           console.log("Report has been embedded:", embeddedReport);
+
+          await embeddedReport.getPages().then((pages) => {
+            pages.forEach((page) => console.log(page.name));
+          });
         }}
       />
     </div>
-    // <></>
   );
 };
 

@@ -3,6 +3,7 @@ import Book from "../images/famicons--book-outline.png";
 import Arrow from "../images/line-md--arrow-right.png";
 import Info from "../images/octicon--info-16.png";
 import Groups from "../images/ci--users.png";
+import Help from "../images/material-symbols--help-outline-rounded.png";
 import "./landingpage.css";
 
 function LandingPage() {
@@ -48,9 +49,6 @@ function LandingPage() {
             />
             <h2>Grupos de Investigación</h2>
           </div>
-          {/* <p>
-          Participan los siguientes grupos de investigación..Infelcom, Gamma.
-        </p> */}
           <ul>
             <li>
               <span>Infelcom</span>
@@ -88,6 +86,17 @@ function LandingPage() {
           </footer>
         </article>
       </section>
+
+      <div className="help-button">
+        <a
+          href="https://"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Help link"
+        >
+          <img src={Help} alt="Help Icon" width={30} />
+        </a>
+      </div>
     </div>
   );
 }

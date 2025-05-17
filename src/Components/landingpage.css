@@ -67,6 +67,7 @@ ul li {
 
 section {
   display: flex;
+  width: fit-content;
   flex-direction: column;
   gap: 2.5em;
   justify-content: center;
@@ -139,6 +140,20 @@ button {
   box-shadow: 0px 0px 20px #18181831;
 }
 
+.help-button {
+  position: absolute;
+  display: flex;
+  padding-right: 2em;
+  width: fit-content;
+  height: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  bottom: 0;
+  gap: 2em;
+  opacity: 0.6;
+}
+
 button:hover {
   scale: 1.05;
   background-color: #ececec;
@@ -147,6 +162,7 @@ button:hover {
 .main-container {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 @media screen and (max-width: 1150px) {
