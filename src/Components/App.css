@@ -7,8 +7,9 @@ body {
 
 header {
   display: flex;
+  width: 100%;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   padding: 10px;
   background-color: #ffcc28;
   gap: 2em;
@@ -16,9 +17,30 @@ header {
 }
 
 header h1 {
-  text-align: center;
+  text-align: left;
   font-size: 2em;
   color: #181818;
+}
+
+.header-left-side {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding: 10px;
+  background-color: #ffcc28;
+  gap: 2em;
+}
+
+.header-right-side {
+  display: flex;
+  padding-right: 2em;
+  width: fit-content;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #ffcc28;
+  gap: 2em;
+  opacity: 0.6;
 }
 
 .button-pagination {
