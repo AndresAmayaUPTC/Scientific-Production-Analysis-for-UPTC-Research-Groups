@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Centro de ayuda del aplicativo SCI-UPTC para el análisis de la producción científica.">
+    <title>Centro de Ayuda · SCI-UPTC</title>
+    <style>
+        :root {
+            --brand: #ffcc28;
+            --brand-soft: #fff6dd;
+            --ink: #181818;
+            --muted: #5f5f5f;
+            --card: #ffffff;
+            --bg: #f4f4f2;
+            --line: #e4e4e0;
+            --danger-bg: #fef2f2;
+            --danger-line: #f5c2c2;
+            --danger-ink: #991b1b;
+            --radius: 12px;
+            --shadow: 0 2px 14px rgba(24, 24, 24, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            background: var(--brand);
+            padding: 3em 1.5em 4.5em;
+            text-align: center;
+        }
+
+        .hero .kicker {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.65);
+            border-radius: 9999px;
+            padding: 0.25em 1em;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .hero h1 {
+            margin: 0.5em 0 0.2em;
+            font-size: 2.4rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            margin: 0 auto;
+            max-width: 640px;
+            color: rgba(24, 24, 24, 0.72);
+            font-size: 1.05rem;
+        }
+
+        .search-wrap {
+            max-width: 560px;
+            margin: 1.6em auto 0;
+            position: relative;
+        }
+
+        .search-wrap svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        #help-search {
+            width: 100%;
+            padding: 0.9em 1em 0.9em 2.8em;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-shadow: var(--shadow);
+            outline: none;
+        }
+
+        #help-search:focus { outline: 3px solid rgba(24, 24, 24, 0.25); }
+
+        .no-results {
+            display: none;
+            max-width: 560px;
+            margin: 0.8em auto 0;
+            background: #fff;
+            border-radius: 8px;
+            padding: 0.6em 1em;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- Sticky nav ---------- */
+        .toc {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(6px);
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            gap: 0.6em;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 0.7em 1em;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--ink);
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 0.45em 1em;
+            border-radius: 9999px;
+            border: 1px solid var(--line);
+            background: #fff;
+            transition: background 150ms ease-in-out, transform 150ms ease-in-out;
+        }
+
+        .toc a:hover { background: var(--brand-soft); transform: translateY(-1px); }
+
+        /* ---------- Layout ---------- */
+        main {
+            max-width: 1024px;
+            margin: -2.2em auto 0;
+            padding: 0 1.25em 4em;
+        }
+
+        section.panel {
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2em;
+            margin-bottom: 1.5em;
+            scroll-margin-top: 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.4em;
+        }
+
+        section.panel h2 {
+            margin: 0 0 0.4em;
+            font-size: 1.6rem;
+        }
+
+        section.panel > p.lead {
+            margin-top: 0;
+            color: var(--muted);
+        }
+
+        /* ---------- Feature cards ---------- */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1em;
+            margin-top: 1.2em;
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 1.2em;
+            background: #fff;
+            transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .card .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--brand-soft);
+            border: 1px solid var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.7em;
+        }
+
+        .card h3 { margin: 0 0 0.3em; font-size: 1.05rem; }
+        .card p { margin: 0; font-size: 0.92rem; color: var(--muted); }
+
+        /* ---------- Limits ---------- */
+        .limits { list-style: none; margin: 1em 0 0; padding: 0; display: grid; gap: 0.8em; }
+
+        .limits li {
+            background: var(--danger-bg);
+            border: 1px solid var(--danger-line);
+            border-radius: 10px;
+            padding: 1em 1.2em;
+            display: flex;
+            gap: 0.8em;
+            align-items: flex-start;
+        }
+
+        .limits li svg { flex-shrink: 0; margin-top: 0.2em; }
+        .limits strong { color: var(--danger-ink); }
+        .limits p { margin: 0.15em 0 0; font-size: 0.92rem; color: #574343; }
+
+        /* ---------- FAQ ---------- */
+        details.faq {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            margin-bottom: 0.7em;
+            background: #fff;
+            overflow: hidden;
+        }
+
+        details.faq summary {
+            cursor: pointer;
+            padding: 1em 1.2em;
+            font-weight: 700;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1em;
+        }
+
+        details.faq summary::-webkit-details-marker { display: none; }
+
+        details.faq summary::after {
+            content: "+";
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--brand-soft);
+            border: 1px solid var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        details.faq[open] summary::after { content: "–"; background: var(--brand); }
+
+        details.faq .answer {
+            padding: 0 1.2em 1.2em;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        /* ---------- Glossary ---------- */
+        .glossary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.8em;
+            margin-top: 1.2em;
+        }
+
+        .glossary div {
+            background: #fafaf8;
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--brand);
+            border-radius: 8px;
+            padding: 0.9em 1em;
+        }
+
+        .glossary dt { font-weight: 700; font-size: 0.95rem; }
+        .glossary dd { margin: 0.25em 0 0; font-size: 0.9rem; color: var(--muted); }
+
+        /* ---------- Steps ---------- */
+        ol.steps { margin: 1em 0 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 0.8em; }
+
+        ol.steps li {
+            counter-increment: step;
+            display: flex;
+            gap: 1em;
+            align-items: flex-start;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 1em 1.2em;
+        }
+
+        ol.steps li::before {
+            content: counter(step);
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--ink);
+            color: var(--brand);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        ol.steps p { margin: 0.15em 0 0; font-size: 0.92rem; color: var(--muted); }
+        ol.steps strong { display: block; }
+
+        /* ---------- Footer ---------- */
+        .support {
+            background: var(--ink);
+            color: #fff;
+            border-radius: var(--radius);
+            padding: 2em;
+            text-align: center;
+            box-shadow: var(--shadow);
+            scroll-margin-top: 80px;
+        }
+
+        .support h2 { margin: 0 0 0.3em; }
+        .support h2 span { color: var(--brand); }
+        .support p { color: rgba(255, 255, 255, 0.75); margin: 0 0 1.2em; }
+
+        .support .btn {
+            display: inline-block;
+            background: var(--brand);
+            color: var(--ink);
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 10px;
+            padding: 0.8em 1.6em;
+            transition: transform 150ms ease-in-out;
+        }
+
+        .support .btn:hover { transform: scale(1.04); }
+
+        footer.legal {
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+            padding: 2em 1em 0;
+        }
+
+        @media screen and (max-width: 640px) {
+            .hero h1 { font-size: 1.7rem; }
+            section.panel { padding: 1.4em; }
+            section.panel h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <span class="kicker">SCI-UPTC · Ayuda</span>
+        <h1>Centro de ayuda</h1>
+        <p>Todo lo que necesitas para navegar el tablero interactivo de producción científica, sin perderte entre pestañas.</p>
+        <div class="search-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="help-search" type="search" placeholder="Buscar en la ayuda… (ej. exportar, filtros, token)" aria-label="Buscar en la ayuda" autocomplete="off">
+        </div>
+        <p class="no-results" id="no-results">Sin coincidencias. Prueba con “filtros”, “páginas” o “permisos”.</p>
+    </header>
+
+    <nav class="toc" aria-label="Contenido de la ayuda">
+        <a href="#what">Qué es</a>
+        <a href="#start">Primeros pasos</a>
+        <a href="#see">Qué puedes hacer</a>
+        <a href="#not">Límites</a>
+        <a href="#FAQ">Preguntas frecuentes</a>
+        <a href="#glosary">Glosario</a>
+    </nav>
+
+    <main>
+        <section class="panel" id="what" data-search="qué es aplicativo dashboard tablero para qué sirve">
+            <span class="section-label">01 · El aplicativo</span>
+            <h2>¿Qué es SCI-UPTC?</h2>
+            <p class="lead">Una plataforma web con un tablero interactivo para explorar la producción científica de los grupos de investigación de la UPTC, directamente desde el navegador.</p>
+            <p style="margin-bottom:0">Los datos del proyecto se consultan desde la misma aplicación, con navegación guiada desde la barra lateral.</p>
+        </section>
+
+        <section class="panel" id="start" data-search="primeros pasos empezar cómo entrar navegación botones barra lateral">
+            <span class="section-label">02 · Primeros pasos</span>
+            <h2>Empieza en 3 pasos</h2>
+            <p class="lead">Del ingreso a tu primera exploración, en menos de un minuto.</p>
+            <ol class="steps">
+                <li data-search="abrir aplicación ingresar mainview">
+                    <div><strong>Abre la aplicación</strong><p>Desde la página de bienvenida pulsa <em>Ir a la Aplicación</em> para entrar a la vista principal.</p></div>
+                </li>
+                <li data-search="esperar cargar tablero datos">
+                    <div><strong>Espera a que cargue el tablero</strong><p>Verás un mensaje de carga mientras se consultan los datos. Si tarda, revisa tu conexión.</p></div>
+                </li>
+                <li data-search="navegar secciones botones lateral resumen total grupos grupo único mapa nube palabras comparador publicaciones miembros">
+                    <div><strong>Navega con la barra lateral</strong><p>Las ocho secciones están en la barra lateral: Resumen general, Total Grupos, Grupo Único, Mapa Revistas, Nube de palabras, Comparador, Publicaciones y Miembros.</p></div>
+                </li>
+            </ol>
+        </section>
+
+        <section class="panel" id="see" data-search="ver hacer visualización gráficos tablas indicadores interactividad filtros segmentaciones actualización automática">
+            <span class="section-label">03 · Capacidades</span>
+            <h2>¿Qué puedes ver y hacer?</h2>
+            <p class="lead">Todo lo disponible depende de cómo el administrador configuró el tablero.</p>
+            <div class="cards">
+                <div class="card" data-search="visualización datos gráficos tablas indicadores">
+                    <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                    <h3>Visualizar datos</h3>
+                    <p>Indicadores, barras comparativas, anillos de avalados, nube de palabras y una serie de publicaciones por año.</p>
+                </div>
+                <div class="card" data-search="navegación páginas botones paginación lateral">
+                    <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                    <h3>Navegar entre secciones</h3>
+                    <p>Cambia de sección con la barra lateral. Los nombres de grupo son enlaces: llevan directo a su ficha.</p>
+                </div>
+                <div class="card" data-search="interactividad clic filtrar gráficos explorar">
+                    <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74"/><path d="M14 10.5a2.5 2.5 0 0 1 5 .5v3a7 7 0 0 1-7 7h-.29a7 7 0 0 1-5.62-2.81L4 16a2.5 2.5 0 0 1 3.73-3.3l2.27 2.27"/></svg></div>
+                    <h3>Interactuar</h3>
+                    <p>Clic en una barra de año filtra las publicaciones de ese año; clic en una palabra de la nube busca los productos que la mencionan; clic en un punto del mapa resalta la ciudad.</p>
+                </div>
+                <div class="card" data-search="filtros segmentaciones ajustar criterios">
+                    <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg></div>
+                    <h3>Usar filtros</h3>
+                    <p>Busca por texto y acota por ciudad, clasificación, programa nacional, tipo, aval y rango de años. Se aplican solos al escribir o elegir, sin pulsar ningún botón.</p>
+                </div>
+                <div class="card" data-search="ordenar columnas exportar csv excel descargar">
+                    <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#181818" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
+                    <h3>Ordenar y exportar</h3>
+                    <p>Pulsa el encabezado de cualquier columna para ordenar por ella. El botón <em>Exportar CSV</em> descarga todos los registros que cumplen los filtros, no solo la página visible.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="not" data-search="no puedes hacer límites modificar estructura exportar permisos restricciones">
+            <span class="section-label">04 · Límites</span>
+            <h2>¿Qué NO puedes hacer?</h2>
+            <p class="lead">Para evitar confusiones, esto queda fuera del alcance del aplicativo.</p>
+            <ul class="limits">
+                <li data-search="modificar estructura visualizaciones datos solo lectura">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    <div><strong>Modificar el tablero</strong><p>No puedes cambiar su estructura, visualizaciones ni datos. Solo visualizas e interactúas según lo permitido.</p></div>
+                </li>
+                <li data-search="exportar datos descargar excel permisos administrador">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    <div><strong>Exportar cualquier vista</strong><p>Las tablas de Grupos, Publicaciones, Miembros y Ciudades se exportan a CSV. Los gráficos no se descargan como imagen.</p></div>
+                </li>
+                <li data-search="ver información sin permisos acceso denegado">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    <div><strong>Ver información sin permisos</strong><p>Solo accedes a los datos para los que tengas autorización en el aplicativo.</p></div>
+                </li>
+            </ul>
+        </section>
+
+        <section class="panel" id="FAQ" data-search="preguntas frecuentes errores problemas soluciones">
+            <span class="section-label">05 · FAQ</span>
+            <h2>Preguntas frecuentes</h2>
+            <p class="lead">Pulsa cada pregunta para ver la respuesta.</p>
+            <details class="faq" data-search="no veo tablero no puedo navegar secciones permisos">
+                <summary>¿Por qué no veo el tablero o no puedo navegar entre secciones?</summary>
+                <div class="answer">Es posible que el servidor de datos no esté disponible o que no tengas permisos suficientes. Recarga la página y, si persiste, contacta al administrador.</div>
+            </details>
+            <details class="faq" data-search="no puedo exportar datos ver visualizaciones restringido configuración">
+                <summary>¿Por qué no puedo exportar datos o ver ciertas visualizaciones?</summary>
+                <div class="answer">Algunas funciones están restringidas por la configuración del tablero o por tus permisos. El administrador puede confirmar qué tienes habilitado.</div>
+            </details>
+            <details class="faq" data-search="error autenticación cerrar sesión soporte técnico">
+                <summary>¿Qué hago si veo un error de autenticación?</summary>
+                <div class="answer">Cierra la sesión, vuelve a ingresar y verifica tu conexión. Si el error continúa, contacta al soporte técnico indicando la hora y el mensaje exacto.</div>
+            </details>
+            <details class="faq" data-search="año fecha publicaciones sin año cobertura serie temporal">
+                <summary>¿Por qué algunas publicaciones no tienen año?</summary>
+                <div class="answer">El año no viene en una columna propia: se extrae del texto de cada registro (después del ISSN en los artículos, antes del ISBN en libros y capítulos). Se identifica en el 96&nbsp;% de los registros. Al filtrar por rango de años, las publicaciones cuyo año no se pudo identificar quedan fuera del resultado.</div>
+            </details>
+            <details class="faq" data-search="secciones tablero excel csv exportar">
+                <summary>¿Qué secciones tiene el tablero?</summary>
+                <div class="answer">La barra lateral da acceso a Resumen, Total Grupos, Grupo Único, Mapa Revistas y Nube de palabras, más un Comparador de hasta 3 grupos. Los datos provienen de los archivos del proyecto (grupos, publicaciones y miembros). Las tablas permiten exportar a CSV con los filtros aplicados (compatible con Excel).</div>
+            </details>
+            <details class="faq" data-search="tablero desactualizado actualización datos viejos">
+                <summary>¿Por qué los datos parecen desactualizados?</summary>
+                <div class="answer">La actualización depende de los datos cargados en el servidor. Espera unos minutos y recarga; si sigue igual, repórtalo al administrador.</div>
+            </details>
+        </section>
+
+        <section class="panel" id="glosary" data-search="glosario términos definiciones tablero página paginación filtros interactividad administrador permisos botón ayuda actualización">
+            <span class="section-label">06 · Glosario</span>
+            <h2>Glosario de términos</h2>
+            <p class="lead">El vocabulario mínimo para entender el aplicativo.</p>
+            <dl class="glossary">
+                <div data-search="tablero dashboard visualizaciones"><dt>Tablero</dt><dd>Conjunto de visualizaciones y tablas que resume la producción científica de los grupos.</dd></div>
+                <div data-search="página sección vista navegación"><dt>Sección del tablero</dt><dd>Cada vista disponible desde la barra lateral (Resumen, Total Grupos, Grupo Único, etc.).</dd></div>
+                <div data-search="paginación cambiar páginas botones"><dt>Paginación</dt><dd>Función para recorrer las tablas por páginas dentro de la aplicación.</dd></div>
+                <div data-search="filtros segmentaciones criterios ajustar"><dt>Filtros</dt><dd>Controles para ajustar qué datos se muestran en cada sección.</dd></div>
+                <div data-search="programa nacional ciencia tecnologia colciencias minciencias"><dt>Programa nacional de CTeI</dt><dd>Clasificación oficial por área temática (Ciencias Básicas, Salud, Ingeniería, etc.) con la que Minciencias agrupa la producción.</dd></div>
+                <div data-search="avalado aval institucional producto"><dt>Producto avalado</dt><dd>Producción que la institución reconoce formalmente como resultado del grupo.</dd></div>
+                <div data-search="csv exportar excel separador"><dt>CSV</dt><dd>Archivo de texto con los datos separados por punto y coma, listo para abrir en Excel.</dd></div>
+                <div data-search="interactividad clic gráficos explorar dinámico"><dt>Interactividad</dt><dd>Posibilidad de hacer clic en gráficos y tablas para explorar los datos.</dd></div>
+                <div data-search="actualización automática datos recientes servidor"><dt>Actualización automática</dt><dd>El tablero muestra datos recientes sin intervención manual.</dd></div>
+                <div data-search="administrador configuración permisos soporte responsable"><dt>Administrador</dt><dd>Responsable de la configuración, los permisos y el soporte.</dd></div>
+                <div data-search="permisos autorizaciones acceso"><dt>Permisos</dt><dd>Autorizaciones necesarias para acceder al tablero y sus datos.</dd></div>
+                <div data-search="botón ayuda manual soporte interfaz"><dt>Botón de ayuda</dt><dd>Acceso a este manual desde la interfaz de la aplicación.</dd></div>
+            </dl>
+        </section>
+
+        <section class="support" id="contacto">
+            <h2>¿Aún necesitas ayuda? <span>Hablemos.</span></h2>
+            <p>Si tu problema no está aquí, el equipo de soporte del grupo INFELCOM puede orientarte.</p>
+            <a class="btn" id="back-btn" href="/mainview">Volver a la aplicación</a>
+        </section>
+
+        <footer class="legal">
+            SCI-UPTC · Grupo de Investigación INFELCOM · Universidad Pedagógica y Tecnológica de Colombia
+        </footer>
+    </main>
+
+    <script>
+        (function () {
+            var input = document.getElementById('help-search');
+            var noResults = document.getElementById('no-results');
+            var backBtn = document.getElementById('back-btn');
+            var sections = document.querySelectorAll('main section.panel');
+            // Elementos filtrables dentro de cada sección (hojas, sin descendientes filtrables)
+            var CHILD_SEL = '.card, details.faq, .glossary > div, .limits > li, ol.steps > li';
+
+            // La aplicación abre la ayuda en una pestaña nueva con ?origen=app.
+            var abiertaDesdeApp = new URLSearchParams(window.location.search).get('origen') === 'app';
+
+            // Los navegadores solo dejan cerrar por script una pestaña con una
+            // única entrada de historial. Los enlaces del menú (#seccion) añadían
+            // una entrada por clic, así que se desplaza sin tocar el historial.
+            document.querySelectorAll('a[href^="#"]').forEach(function (enlace) {
+                enlace.addEventListener('click', function (e) {
+                    var destino = document.getElementById(enlace.getAttribute('href').slice(1));
+                    if (!destino) return;
+                    e.preventDefault();
+                    destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    window.history.replaceState(null, '', enlace.getAttribute('href'));
+                });
+            });
+
+            backBtn.addEventListener('click', function (e) {
+                if (abiertaDesdeApp) {
+                    // La aplicación sigue abierta en la pestaña de origen: basta con cerrar esta.
+                    e.preventDefault();
+                    window.close();
+                    // Si el navegador no permitió cerrarla, este temporizador sí se
+                    // ejecuta: se continúa hacia la aplicación como antes.
+                    setTimeout(function () {
+                        window.location.href = backBtn.getAttribute('href');
+                    }, 300);
+                    return;
+                }
+                // Abierta en la misma pestaña (o directamente): volver atrás si se puede;
+                // si no, el href="/mainview" lleva a la app.
+                if (window.history.length > 1) {
+                    e.preventDefault();
+                    window.history.back();
+                }
+            });
+
+            function normalize(s) {
+                return (s || '').toLowerCase()
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            }
+
+            // Solo el encabezado de la sección (etiqueta + título + entradilla),
+            // NO el texto agregado de los hijos: si no, toda coincidencia interna
+            // mostraría la sección completa sin filtrar.
+            function headerText(section) {
+                var texts = [];
+                Array.prototype.forEach.call(section.children, function (child) {
+                    if (child.matches && child.matches('.section-label, h2, p.lead')) {
+                        texts.push(child.textContent);
+                    }
+                });
+                return texts.join(' ');
+            }
+
+            function resetSection(section) {
+                section.style.display = '';
+                Array.prototype.forEach.call(section.querySelectorAll(CHILD_SEL), function (c) {
+                    c.style.display = '';
+                });
+            }
+
+            input.addEventListener('input', function () {
+                var q = normalize(input.value.trim());
+                var visibleSections = 0;
+
+                Array.prototype.forEach.call(sections, function (section) {
+                    if (!q) {
+                        resetSection(section);
+                        visibleSections++;
+                        return;
+                    }
+
+                    var children = section.querySelectorAll(CHILD_SEL);
+
+                    if (children.length === 0) {
+                        // Sección sin hijos filtrables ("¿Qué es?"): coincide contra su propio texto.
+                        var selfHit = normalize(headerText(section) + ' ' + section.textContent).indexOf(q) !== -1;
+                        section.style.display = selfHit ? '' : 'none';
+                        if (selfHit) visibleSections++;
+                        return;
+                    }
+
+                    var headHit = normalize(headerText(section)).indexOf(q) !== -1;
+                    var anyHit = headHit;
+                    Array.prototype.forEach.call(children, function (child) {
+                        var cHit = headHit ||
+                            normalize(child.getAttribute('data-search') + ' ' + child.textContent).indexOf(q) !== -1;
+                        child.style.display = cHit ? '' : 'none';
+                        if (cHit) anyHit = true;
+                    });
+                    section.style.display = anyHit ? '' : 'none';
+                    if (anyHit) visibleSections++;
+                });
+
+                noResults.style.display = visibleSections === 0 ? 'block' : 'none';
+            });
+        })();
+    </script>
+</body>
+</html>

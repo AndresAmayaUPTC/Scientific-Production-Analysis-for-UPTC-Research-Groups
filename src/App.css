@@ -1,30 +1,50 @@
 .App {
   text-align: left;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
 }
+
 body {
   margin: 0px;
 }
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
 .img_logo {
   width: 100%;
-  height: 30%;
+  max-width: 220px;
+  height: auto;
 }
 
 .App_aside {
-  display: flex;
-  position: fixed;
-  height: 100%;
-  width: fit-content;
+  width: 280px;
+  flex-shrink: 0;
 }
 
 .App_main {
-  display: flex;
-  width: calc(100% - 19em);
-  margin-left: 18em;
-  margin-right: 1em;
-  margin-top: 1em;
-  height: calc(100dvh - 150px);
+  flex: 1;
+  min-width: 0;
+  margin: 1em 1em 1em 0;
+  min-height: calc(100dvh - 150px);
 }
 
 .App_header {
@@ -33,7 +53,24 @@ body {
   padding: 1em 0;
 }
 
-div {
-  height: 100%;
-  width: 100%;
+/* Contenedor de la vista principal: header arriba, sidebar + contenido debajo */
+.App_layout {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 768px) {
+  .App_layout {
+    flex-direction: column;
+  }
+
+  .App_aside {
+    width: 100%;
+  }
+
+  .App_main {
+    margin: 1em;
+  }
 }

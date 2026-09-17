@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Pruebas: .venv/Scripts/python -m pytest -q
+pytest==9.1.1
+httpx==0.28.1
+mongomock==4.3.0

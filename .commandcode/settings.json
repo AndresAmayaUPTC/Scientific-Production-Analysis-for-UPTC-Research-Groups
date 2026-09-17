@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(node -v)",
+      "Shell(npm:*)",
+      "Shell(python --version)",
+      "Shell(pip:*)",
+      "powershell",
+      "Shell(python -m uvicorn main:app --port 8000)",
+      "Shell(python \"extraccion-/api.py\")"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}

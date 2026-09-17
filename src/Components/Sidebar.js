@@ -1,47 +1,24 @@
 import React from "react";
-import "../App.css";
+import "./App.css";
+import { VIEWS } from "./views";
 
-const Sidebar = () => {
-  const navigateToPage = (pageName) => {
-    if (window.report) {
-      window.report.setPage(pageName).catch((error) => {
-        console.error("Error al navegar a la página:", error);
-      });
-    } else {
-      console.error("El informe de Power BI aún no está incrustado.");
-    }
-  };
-
-  return (
-    <div className="sidebar">
-      <div className="pagination-buttons">
+// Botonera presentacional: solo avisa qué vista se eligió.
+// MainView pasa la vista activa al Dashboard, que decide qué sección pinta.
+const Sidebar = ({ activeView = "resumen", onSelectView = () => {} }) => (
+  <div className="sidebar">
+    <div className="pagination-buttons">
+      {VIEWS.map((v) => (
         <button
-          className="button-pagination"
-          onClick={() => navigateToPage("TotalGroup")}
+          key={v.id}
+          className={"button-pagination" + (activeView === v.id ? " active" : "")}
+          aria-current={activeView === v.id ? "page" : undefined}
+          onClick={() => onSelectView(v.id)}
         >
-          Total Grupos
+          {v.label}
         </button>
-        <button
-          className="button-pagination"
-          onClick={() => navigateToPage("Onlygropu")}
-        >
-          Grupo Unico
-        </button>
-        <button
-          className="button-pagination"
-          onClick={() => navigateToPage("Nube de palabras")}
-        >
-          Nube de palabras
-        </button>
-        <button
-          className="button-pagination"
-          onClick={() => navigateToPage("mapa de revistas")}
-        >
-          Mapa Revistas
-        </button>
-      </div>
+      ))}
     </div>
-  );
-};
+  </div>
+);
 
 export default Sidebar;

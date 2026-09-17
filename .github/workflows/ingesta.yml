@@ -1,0 +1,49 @@
+# Ingesta periódica del GrupLac como tarea programada de GitHub Actions.
+#
+# Alternativa al planificador interno del backend (SCRAPE_SCHEDULER). Conviene
+# usar esta vía cuando el backend corre en varias réplicas: así una sola tarea
+# scrapea, en lugar de todas a la vez.
+#
+# Requiere el secreto MONGODB_URI en Settings > Secrets and variables > Actions.
+name: Ingesta GrupLac
+
+on:
+  schedule:
+    # Día 1 de cada mes a las 06:00 UTC (01:00 en Colombia, cuando el
+    # portal está descargado). El GrupLac cambia despacio: ver README.
+    - cron: "0 6 1 * *"
+  workflow_dispatch:        # permite lanzarla a mano desde la pestaña Actions
+
+concurrency:
+  group: ingesta-gruplac
+  cancel-in-progress: false
+
+jobs:
+  scrapear:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Ejecutar la ingesta
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ vars.MONGODB_DB || 'sci_uptc' }}
+        # Devuelve código 1 si la corrida no llegó a publicarse, de modo que
+        # el fallo quede visible en Actions. Los datos vigentes no se tocan.
+        run: python -m ingesta.run scrapear
+
+      - name: Estado de la base tras la ingesta
+        if: always()
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DB: ${{ vars.MONGODB_DB || 'sci_uptc' }}
+        run: python -m ingesta.run estado

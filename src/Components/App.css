@@ -1,22 +1,22 @@
-body {
+.sidebar,
+.app-header,
+.App_main {
   font-family: Arial, sans-serif;
-  margin: 0px;
-  padding: 0;
-  text-align: center;
 }
 
-header {
+.app-header {
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 10px 16px;
   background-color: #ffcc28;
   gap: 2em;
   color: #181818c4;
+  flex-shrink: 0;
 }
 
-header h1 {
+.app-header h1 {
   text-align: left;
   font-size: 2em;
   color: #181818;
@@ -33,11 +33,11 @@ header h1 {
 
 .header-right-side {
   display: flex;
-  padding-right: 2em;
   width: fit-content;
+  flex: 0 0 auto;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
+  justify-content: center;
+  padding: 10px 2em 10px 10px;
   background-color: #ffcc28;
   gap: 2em;
   opacity: 0.6;
@@ -47,7 +47,7 @@ header h1 {
   background-color: transparent;
   border: none;
   border-radius: 8px;
-  padding: 0.7em 4em 0.7em 1em;
+  padding: 0.7em 1em;
   cursor: pointer;
   font-weight: 500;
   font-size: 1em;
@@ -58,6 +58,12 @@ header h1 {
   gap: 0.7em;
   transition: all 150ms ease-in-out;
   box-shadow: none;
+  height: auto;
+  flex: 0 0 auto;
+  align-self: stretch;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .button-pagination:hover {
@@ -65,17 +71,46 @@ header h1 {
   /* box-shadow: 0px 0px 20px #18181831; */
 }
 
+.button-pagination.active {
+  background-color: white;
+  box-shadow: inset 4px 0 0 #ffcc28, 0px 0px 12px #18181822;
+  font-weight: 700;
+}
+
 .sidebar {
   width: 100%;
   height: 100%;
-  padding: 3em 2em;
+  padding: 2em 1.5em;
   background-color: #e9e9e9;
+  display: flex;
+  flex-direction: column;
 }
 
 .pagination-buttons {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: fit-content;
+  height: auto;
   gap: 1em;
+  align-items: stretch;
+}
+
+@media screen and (max-width: 768px) {
+  .app-header {
+    flex-wrap: wrap;
+    gap: 1em;
+  }
+
+  .app-header h1 {
+    font-size: 1.2em;
+  }
+
+  .header-left-side {
+    gap: 1em;
+    padding: 0;
+  }
+
+  .sidebar {
+    padding: 1em;
+  }
 }

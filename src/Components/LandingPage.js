@@ -20,12 +20,12 @@ function LandingPage() {
           />
         </div>
 
-        <div>
+        <div className="landing-titles">
           <h1>Bienvenido a SCI-UPTC.</h1>
           <span>Scientific Production Analysis for UPTC Research Groups</span>
         </div>
 
-        <button onClick={() => (window.location.href = "/mainView")}>
+        <button className="cta-button" onClick={() => (window.location.href = "/mainView")}>
           Ir a la Aplicación
           <img
             src={Arrow}
@@ -37,9 +37,9 @@ function LandingPage() {
         </button>
       </header>
 
-      <section>
-        <article>
-          <div>
+      <section className="landing-section">
+        <article className="landing-card">
+          <div className="card-heading">
             <img
               src={Groups}
               alt="Groups icon"
@@ -49,7 +49,7 @@ function LandingPage() {
             />
             <h2>Grupos de Investigación</h2>
           </div>
-          <ul>
+          <ul className="group-list">
             <li>
               <span>Infelcom</span>
             </li>
@@ -59,8 +59,8 @@ function LandingPage() {
           </ul>
         </article>
 
-        <article>
-          <div>
+        <article className="landing-card">
+          <div className="card-heading">
             <img
               src={Info}
               alt="Info icon"
@@ -89,7 +89,7 @@ function LandingPage() {
 
       <div className="help-button">
         <a
-          href="https://"
+          href="/help.html?origen=app"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Help link"

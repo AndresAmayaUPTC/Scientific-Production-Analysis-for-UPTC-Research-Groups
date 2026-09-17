@@ -4,7 +4,7 @@ import Help from "../images/material-symbols--help-outline-rounded.png";
 
 const Header = () => {
   return (
-    <header>
+    <header className="app-header">
       <div className="header-left-side">
         <img
           src="https://uptc.edu.co/sitio/portal/PRUEBAS/pruebasM/Frontal/.content/img/botones/logoUPTC24.svg"
@@ -17,7 +17,7 @@ const Header = () => {
 
       <div className="header-right-side">
         <a
-          href="https://"
+          href="/help.html?origen=app"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Help link"

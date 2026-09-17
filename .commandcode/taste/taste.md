@@ -1,0 +1,2 @@
+- Prefers communication in Spanish. Confidence: 0.9
+- When verifying whether a scraping target or external portal works, only probe connectivity/HTTP response — do not run the full scraping pipeline unless explicitly asked. Confidence: 0.95
